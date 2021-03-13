@@ -7,6 +7,7 @@ function Routes() {
     <BrowserRouter>
         <Switch>
             <Route path="/" exact component={Landing}/>
+            <Route path="/order/create" exact component={Landing}/>
         </Switch>
     </BrowserRouter>
   );

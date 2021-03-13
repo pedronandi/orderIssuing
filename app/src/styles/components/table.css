@@ -1,0 +1,21 @@
+Table {
+  margin-top: 40px;
+
+  border-collapse: collapse;
+  border: 2px solid #00BEE5;
+  
+}
+
+td, th {
+  padding: 0 5px 0 5px;
+}
+
+thead {
+  background-color: #00BEE5;
+  color: #212743;
+  text-align: left;
+}
+
+a {
+  color: #00BEE5;
+}
