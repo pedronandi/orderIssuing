@@ -18,6 +18,13 @@ export default function ClientDropDown() {
     });
   }, []);
 
+  const [selectedClient, setSelectedClient] = useState<Client>();
+
+  function handleChange(event: ChangeEvent<HTMLSelectElement>) {
+    setSelectedClient(clients[event.target.value as any]);
+    console.log(selectedClient);
+  }
+
   return (
     <select onChange={handleChange}>
       {clients.map((client, index) => {

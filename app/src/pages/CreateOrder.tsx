@@ -6,14 +6,8 @@ import ClientDropDown from '../components/ClientDropDown';
 import '../styles/pages/create-order.css';
 
 export default function CreateOrder() {
-  const [selectedClient, setSelectedClient] = useState<Client>();
-  
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
-  }
-
-  function handleChange(event: ChangeEvent<HTMLSelectElement>) {
-    setSelectedClient(clients[event.target.value as any]);
   }
 
   return (
@@ -26,7 +20,7 @@ export default function CreateOrder() {
 
               <div className="input-block">
                 <label htmlFor="client">Cliente</label>
-                <ClientDropDown onChange={handleChange}/>
+                <ClientDropDown/>
               </div>
           </fieldset>
         </form>
