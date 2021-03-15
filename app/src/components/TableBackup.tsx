@@ -42,7 +42,7 @@ interface TableProps<T extends MinTableItem> {
 export default function Table<T extends MinTableItem>(props: TableProps<T>) {
   function renderRow(item: T) {
     return (
-      <tr>
+      <tr key={`row-${item.id}`}>
         {objectKeys(item).map((itemProperty) => {
           const customRenderer = props.customRenderers?.[itemProperty];
 

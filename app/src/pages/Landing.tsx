@@ -1,31 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
 
-import Table from '../components/Table';
+import api from '../services/api';
 
 import '../styles/pages/landing.css';
 
-const stockItems = [
-    {
-      id: 1,
-      name: "Darth Vader",
-      update: {
-        name: "Atualizar",
-        link: "https://www.google.com"
-      }
-    },
-    {
-      id: 2,
-      name: "Obi-wan",
-      update: {
-        name: "Atualizar",
-        link: "https://www.google.com"
-      }
-    }
-];    
+interface Client {
+    id: number;
+    name: string;
+}
+
+interface Product {
+    id: number;
+    name: string;
+    unitPrice: number;
+    multiple: number;
+}
+
+interface Item {
+    id: number;
+    product: Product;
+    amount: number;
+    unitPrice: number;
+    profitability: string;
+}
+
+interface Order {
+    id: number;
+    client: Client;
+    items: Item[];
+}
 
 function Landing() {
+    const [orders, setOrders] = useState<Order[]>([]);
+
+    useEffect(() => {
+        api.get('orderRequest').then(response => {
+            setOrders(response.data);
+        });
+    }, []);
+    
     return (
         <div id="page-landing">
             <div className="content-wrapper">
@@ -34,21 +49,26 @@ function Landing() {
                 <p>Abaixo, os pedidos já existentes:</p>
                 </main>
 
-                <Table
-                    headers={{
-                    id: "Pedido",
-                    name: "Cliente",
-                    update: "Ação"
-                    }}
-                    items={stockItems}
-                    customRenderers={{
-                        update: (it) => (
-                            <a
-                            href={`${it.update.link}`}
-                            >{`${it.update.name}`}</a>
-                        )
-                    }}
-                />
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pedido</th>
+                            <th>Cliente</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {orders.map(order => {
+                            return (
+                                <tr key={order.id}>
+                                    <td>{order.id}</td>
+                                    <td>{order.client.name}</td>
+                                    <td><a href="https://www.google.com">Atualizar</a></td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
 
                 <Link to="/order/create" className="create-order">
                   <FiPlus size={32} className="add"/>

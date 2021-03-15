@@ -1,0 +1,51 @@
+#page-create-order {
+  display: flex;
+}
+
+#page-create-order main {
+  flex: 1;
+}
+
+form.create-order-form {
+  width: 700px;
+  margin: 64px auto;
+
+  background: #212743;
+  border: 2px solid #00BEE5;
+  
+  padding: 64px 80px;
+
+  overflow: hidden;
+}
+
+form.create-order-form fieldset {
+  border: 0;
+}
+
+form.create-order-form fieldset + fieldset {
+  margin-top: 80px;
+}
+
+form.create-order-form fieldset legend {
+  width: 100%;
+
+  font-size: 32px;
+  line-height: 34px;
+  color: #00BEE5;
+  font-weight: 700;
+
+  border-bottom: 2px solid #00BEE5;
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+}
+
+form.create-order-form .input-block + .input-block {
+  margin-top: 24px;
+}
+
+form.create-order-form .input-block label {
+  display: flex;
+  color: #00BEE5;
+  margin-bottom: 8px;
+  line-height: 24px;
+}

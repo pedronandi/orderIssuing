@@ -22,6 +22,10 @@
   flex-direction: column;
 }
 
+#page-landing .content-wrapper a {
+  color: #00BEE5;
+}
+
 #page-landing .content-wrapper main {
   max-width: 1100px;
 }
@@ -36,6 +40,23 @@
   margin-top: 40px;
   font-size: 24px;
   line-height: 34px;
+}
+
+#page-landing .content-wrapper table {
+  margin-top: 40px;
+
+  border-collapse: collapse;
+  border: 2px solid #00BEE5;
+}
+
+#page-landing .content-wrapper thead {
+  background-color: #00BEE5;
+  color: #212743;
+  text-align: left;
+}
+
+#page-landing .content-wrapper table td, th {
+  padding: 0 5px 0 5px;
 }
 
 .content-wrapper .location strong {
