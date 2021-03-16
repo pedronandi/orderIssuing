@@ -21,6 +21,8 @@ export default function CreateOrder() {
     });
   }, []);
 
+  //const [client, setClient] = useState<Option>();
+
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
   }

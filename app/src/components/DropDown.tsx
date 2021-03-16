@@ -13,6 +13,8 @@ interface DropDownProps {
 
 export default function DropDown(props: DropDownProps) {
   function handleChange(event: ChangeEvent<HTMLSelectElement>) {
+    event.preventDefault();
+    
     console.log(props.options[event.target.value as any]);
   }
 
