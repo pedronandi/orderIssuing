@@ -9,13 +9,12 @@ interface Option {
 
 interface DropDownProps {
   options: Option[];
+  onDropDownChange: any;
 }
 
 export default function DropDown(props: DropDownProps) {
   function handleChange(event: ChangeEvent<HTMLSelectElement>) {
-    event.preventDefault();
-    
-    console.log(props.options[event.target.value as any]);
+    props.onDropDownChange(event.target.value);
   }
 
   return (

@@ -14,14 +14,18 @@ interface Option {
 
 export default function CreateOrder() {
   const [clients, setClients] = useState<Option[]>([]);
-
+  
   useEffect(() => {
     api.get('client').then(response => {
       setClients(response.data);
     });
   }, []);
 
-  //const [client, setClient] = useState<Option>();
+  const [client, setClient] = useState<Option>();
+
+  function handleClientChange(index: number) {
+    setClient(clients[index]);
+  }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -37,7 +41,21 @@ export default function CreateOrder() {
 
               <div className="input-block">
                 <label htmlFor="client">Cliente</label>
-                <DropDown options={clients}/>
+                <DropDown options={clients} onDropDownChange={handleClientChange}/>
+                <label htmlFor="items">Itens</label>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Preço Unitário</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
               </div>
           </fieldset>
         </form>

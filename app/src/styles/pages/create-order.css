@@ -35,7 +35,6 @@ form.create-order-form fieldset legend {
   font-weight: 700;
 
   border-bottom: 2px solid #00BEE5;
-  margin-bottom: 40px;
   padding-bottom: 24px;
 }
 
@@ -46,6 +45,21 @@ form.create-order-form .input-block + .input-block {
 form.create-order-form .input-block label {
   display: flex;
   color: #00BEE5;
-  margin-bottom: 8px;
+  margin: 20px 0 8px 0;
   line-height: 24px;
+}
+
+table {
+  border-collapse: collapse;
+  border: 2px solid #00BEE5;
+}
+
+thead {
+  background-color: #00BEE5;
+  color: #212743;
+  text-align: left;
+}
+
+table td, th {
+  padding: 0 5px 0 5px;
 }

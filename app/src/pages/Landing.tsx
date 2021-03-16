@@ -6,21 +6,14 @@ import api from '../services/api';
 
 import '../styles/pages/landing.css';
 
-interface Client {
-    id: number;
-    name: string;
-}
-
-interface Product {
-    id: number;
-    name: string;
-    unitPrice: number;
-    multiple: number;
-}
-
 interface Item {
     id: number;
-    product: Product;
+    product: {
+        id: number;
+        name: string;
+        unitPrice: number;
+        multiple: number;
+    };
     amount: number;
     unitPrice: number;
     profitability: string;
@@ -28,7 +21,10 @@ interface Item {
 
 interface Order {
     id: number;
-    client: Client;
+    client: {
+        id: number;
+        name: string;
+    };
     items: Item[];
 }
 
