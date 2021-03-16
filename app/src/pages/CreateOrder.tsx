@@ -1,11 +1,26 @@
-import React, { FormEvent } from "react";
+import React, { useState, useEffect, FormEvent } from "react";
 
 import Sidebar from '../components/Sidebar';
-import ClientDropDown from '../components/ClientDropDown';
+import DropDown from '../components/DropDown';
+
+import api from '../services/api';
 
 import '../styles/pages/create-order.css';
 
+interface Option {
+  id: number;
+  name: string;
+}
+
 export default function CreateOrder() {
+  const [clients, setClients] = useState<Option[]>([]);
+
+  useEffect(() => {
+    api.get('client').then(response => {
+      setClients(response.data);
+    });
+  }, []);
+
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
   }
@@ -20,7 +35,7 @@ export default function CreateOrder() {
 
               <div className="input-block">
                 <label htmlFor="client">Cliente</label>
-                <ClientDropDown/>
+                <DropDown options={clients}/>
               </div>
           </fieldset>
         </form>
