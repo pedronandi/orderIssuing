@@ -48,18 +48,3 @@ form.create-order-form .input-block label {
   margin: 20px 0 8px 0;
   line-height: 24px;
 }
-
-table {
-  border-collapse: collapse;
-  border: 2px solid #00BEE5;
-}
-
-thead {
-  background-color: #00BEE5;
-  color: #212743;
-  text-align: left;
-}
-
-table td, th {
-  padding: 0 5px 0 5px;
-}

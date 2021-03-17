@@ -6,26 +6,24 @@ import api from '../services/api';
 
 import '../styles/pages/landing.css';
 
-interface Item {
-    id: number;
-    product: {
-        id: number;
-        name: string;
-        unitPrice: number;
-        multiple: number;
-    };
-    amount: number;
-    unitPrice: number;
-    profitability: string;
-}
-
 interface Order {
     id: number;
     client: {
         id: number;
         name: string;
     };
-    items: Item[];
+    items: {
+        id: number;
+        product: {
+            id: number;
+            name: string;
+            unitPrice: number;
+            multiple: number;
+        };
+        amount: number;
+        unitPrice: number;
+        profitability: string;
+    }[];
 }
 
 function Landing() {

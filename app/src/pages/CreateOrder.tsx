@@ -14,17 +14,40 @@ interface Option {
 
 export default function CreateOrder() {
   const [clients, setClients] = useState<Option[]>([]);
-  
+  const [client, setClient] = useState<Option>();
+  const [products, setProducts] = useState<Option[]>([]);
+  const [product, setProduct] = useState<Option>();
+
   useEffect(() => {
     api.get('client').then(response => {
       setClients(response.data);
     });
   }, []);
 
-  const [client, setClient] = useState<Option>();
+  useEffect(() => {
+    api.get('product').then(response => {
+      var productsRetrieved: Option[] = [];
+      
+      response.data.forEach((element: any) => {
+        productsRetrieved = [
+          ...productsRetrieved,
+          {
+            id: element.id,
+            name: element.name
+          }
+        ]
+      });
+
+      setProducts(productsRetrieved);
+    });
+  }, []);
 
   function handleClientChange(index: number) {
     setClient(clients[index]);
+  }
+
+  function handleProductChange(index: number) {
+    setProduct(products[index]);
   }
 
   async function handleSubmit(event: FormEvent) {
@@ -43,19 +66,7 @@ export default function CreateOrder() {
                 <label htmlFor="client">Cliente</label>
                 <DropDown options={clients} onDropDownChange={handleClientChange}/>
                 <label htmlFor="items">Itens</label>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Produto</th>
-                            <th>Quantidade</th>
-                            <th>Preço Unitário</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                    </tbody>
-                </table>
+                <DropDown options={products} onDropDownChange={handleProductChange}/>
               </div>
           </fieldset>
         </form>
