@@ -1,20 +1,21 @@
 import React, { useState, useEffect, FormEvent } from "react";
+import { FiPlus } from "react-icons/fi";
 
 import Sidebar from '../components/Sidebar';
 import DropDown from '../components/DropDown';
+import ItemTable from "../components/ItemTable";
+
+import { Option } from '../interfaces/Option';
+import { Data } from '../interfaces/Data';
 
 import api from '../services/api';
 
 import '../styles/pages/create-order.css';
 
-interface Option {
-  id: number;
-  name: string;
-}
-
 export default function CreateOrder() {
   const [clients, setClients] = useState<Option[]>([]);
   const [client, setClient] = useState<Option>();
+  const [data, setRowData] = useState<Data[]>([]);
   const [products, setProducts] = useState<Option[]>([]);
   const [product, setProduct] = useState<Option>();
 
@@ -54,6 +55,21 @@ export default function CreateOrder() {
     event.preventDefault();
   }
 
+  /*teste*/
+  
+  const onAddRowClick = () => {
+    const item: Data = {
+      product: "",
+      amount: 0,
+      unitPrice: 0,
+      profitability: ""
+    };
+    
+    setRowData(
+      data.concat(item)
+    )
+  }
+
   return (
     <div id="page-create-order">
       <Sidebar/>
@@ -67,6 +83,11 @@ export default function CreateOrder() {
                 <DropDown options={clients} onDropDownChange={handleClientChange}/>
                 <label htmlFor="items">Itens</label>
                 <DropDown options={products} onDropDownChange={handleProductChange}/>
+                <button onClick={onAddRowClick} className="add-item">
+                  <FiPlus size={20} className="add-item-logo"/>
+                  Adicionar Item
+                </button>
+                <ItemTable data={data}/>
               </div>
           </fieldset>
         </form>

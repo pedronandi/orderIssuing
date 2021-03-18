@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
 
+import { Product } from '../interfaces/Product';
+
 import api from '../services/api';
 
 import '../styles/pages/landing.css';
@@ -14,12 +16,7 @@ interface Order {
     };
     items: {
         id: number;
-        product: {
-            id: number;
-            name: string;
-            unitPrice: number;
-            multiple: number;
-        };
+        product: Product;
         amount: number;
         unitPrice: number;
         profitability: string;

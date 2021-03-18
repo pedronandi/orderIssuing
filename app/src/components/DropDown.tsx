@@ -1,11 +1,8 @@
 import React, { ChangeEvent } from 'react';
 
-import '../styles/components/drop-down.css';
+import { Option } from '../interfaces/Option';
 
-interface Option {
-  id: number;
-  name: string;
-}
+import '../styles/components/drop-down.css';
 
 interface DropDownProps {
   options: Option[];
