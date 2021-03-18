@@ -5,19 +5,19 @@ import Sidebar from '../components/Sidebar';
 import DropDown from '../components/DropDown';
 import ItemTable from "../components/ItemTable";
 
-import { Option } from '../interfaces/Option';
 import { Data } from '../interfaces/Data';
+import { Client } from '../interfaces/Client';
+import { Product } from '../interfaces/Product';
 
 import api from '../services/api';
 
 import '../styles/pages/create-order.css';
 
 export default function CreateOrder() {
-  const [clients, setClients] = useState<Option[]>([]);
-  const [client, setClient] = useState<Option>();
+  const [clients, setClients] = useState<Client[]>([]);
+  const [client, setClient] = useState<Client>();
+  const [products, setProducts] = useState<Product[]>([]);
   const [data, setRowData] = useState<Data[]>([]);
-  const [products, setProducts] = useState<Option[]>([]);
-  const [product, setProduct] = useState<Option>();
 
   useEffect(() => {
     api.get('client').then(response => {
@@ -27,7 +27,7 @@ export default function CreateOrder() {
 
   useEffect(() => {
     api.get('product').then(response => {
-      var productsRetrieved: Option[] = [];
+      /*var productsRetrieved: Option[] = [];
       
       response.data.forEach((element: any) => {
         productsRetrieved = [
@@ -39,7 +39,8 @@ export default function CreateOrder() {
         ]
       });
 
-      setProducts(productsRetrieved);
+      setProducts(productsRetrieved);*/
+      setProducts(response.data);
     });
   }, []);
 
@@ -47,27 +48,23 @@ export default function CreateOrder() {
     setClient(clients[index]);
   }
 
-  function handleProductChange(index: number) {
+  /*function handleProductChange(index: number) {
     setProduct(products[index]);
-  }
+  }*/
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
   }
 
-  /*teste*/
-  
   const onAddRowClick = () => {
     const item: Data = {
-      product: "",
-      amount: 0,
-      unitPrice: 0,
+      products: products,
+      amount: undefined,
+      unitPrice: undefined,
       profitability: ""
     };
     
-    setRowData(
-      data.concat(item)
-    )
+    setRowData(data.concat(item));
   }
 
   return (
@@ -82,7 +79,7 @@ export default function CreateOrder() {
                 <label htmlFor="client">Cliente</label>
                 <DropDown options={clients} onDropDownChange={handleClientChange}/>
                 <label htmlFor="items">Itens</label>
-                <DropDown options={products} onDropDownChange={handleProductChange}/>
+                {/*<DropDown options={products} onDropDownChange={handleProductChange}/>*/}
                 <button onClick={onAddRowClick} className="add-item">
                   <FiPlus size={20} className="add-item-logo"/>
                   Adicionar Item

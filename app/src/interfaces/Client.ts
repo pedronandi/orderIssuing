@@ -1,4 +1,4 @@
-export interface Option {
+export interface Client {
   id: number;
   name: string;
 }

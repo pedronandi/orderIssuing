@@ -1,30 +1,17 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useTable, Column, useSortBy } from "react-table";
+
+import DropDown from '../components/DropDown';
 
 import { Data } from '../interfaces/Data';
 
 import '../styles/components/item-table.css';
 
-/* https://codesandbox.io/s/997mn?file=/src/index.tsx:261-269 */
-
-const columns: Column<Data>[] = [
-  {
-    Header: "Produto",
-    accessor: "product"
-  },
-  {
-    Header: "Quantidade",
-    accessor: "amount"
-  },
-  {
-    Header: "Preço Unitário",
-    accessor: "unitPrice"
-  },
-  {
-    Header: "Rentabilidade",
-    accessor: "profitability"
-  }
-];
+/* 
+  https://codesandbox.io/s/997mn?file=/src/index.tsx:261-269 
+  https://cloudnweb.dev/2020/08/how-to-build-an-actionable-data-table-with-react-table-and-tailwindcss/
+  https://retool.com/blog/building-a-react-table-component/
+*/
 
 interface ItemTableProps {
   data: Data[];
@@ -32,6 +19,34 @@ interface ItemTableProps {
 
 export default function ItemTable(props: ItemTableProps) {
   const{data} = props;
+
+  console.log(data);
+
+  function handleProductChange(index: number) {
+    console.log(index);
+  }
+
+  const columns: Column<Data>[] = useMemo(() => [
+    {
+      Header: "Produto",
+      accessor: "products",
+      Cell: ({ cell: { value } }) => (
+        <DropDown options={value} onDropDownChange={handleProductChange}/>
+      )
+    },
+    {
+      Header: "Quantidade",
+      accessor: "amount"
+    },
+    {
+      Header: "Preço Unitário",
+      accessor: "unitPrice"
+    },
+    {
+      Header: "Rentabilidade",
+      accessor: "profitability"
+    }
+  ], []);
   
   const {
     getTableProps,
@@ -71,5 +86,5 @@ export default function ItemTable(props: ItemTableProps) {
         })}
       </tbody>
     </table>
-  );
+  );    
 };
