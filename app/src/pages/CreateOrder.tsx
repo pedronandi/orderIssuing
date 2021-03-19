@@ -1,49 +1,21 @@
-import React, { useState, useEffect, FormEvent } from "react";
+import React, { useState, FormEvent } from "react";
 import { FiPlus } from "react-icons/fi";
 
 import Sidebar from '../components/Sidebar';
-import DropDown from '../components/DropDown';
+import ClientDropDown from '../components/ClientDropDown';
 import ItemTable from "../components/ItemTable";
 
 import { Client } from '../interfaces/Client';
 import { Data } from '../interfaces/Data';
-import { Product } from '../interfaces/Product';
-
-import api from '../services/api';
 
 import '../styles/pages/create-order.css';
 
 export default function CreateOrder() {
-  const [clients, setClients] = useState<Client[]>([]);
   const [client, setClient] = useState<Client>();
-  const [products, setProducts] = useState<Product[]>([]);
   const [items, setItem] = useState<Data[]>([]);
 
-  useEffect(() => {
-    api.get('client').then(response => {
-      setClients(response.data);
-    });
-  }, []);
-
-  useEffect(() => {
-    api.get('product').then(response => {
-      /*var productsRetrieved: Option[] = [];
-      
-      response.data.forEach((element: any) => {
-        productsRetrieved = [
-          ...productsRetrieved,
-          {
-            id: element.id,
-            name: element.name
-          }
-        ]
-      });*/
-      setProducts(response.data);
-    });
-  }, []);
-
-  function handleClientChange(index: number) {
-    setClient(clients[index]);
+  function handleClientChange(client: Client) {
+    setClient(client);
   }
 
   async function handleSubmit(event: FormEvent) {
@@ -52,6 +24,7 @@ export default function CreateOrder() {
 
   const onAddRowClick = () => {
     const emptyItem: Data = {
+      id: undefined,
       product: undefined,
       amount: undefined,
       unitPrice: undefined,
@@ -71,13 +44,13 @@ export default function CreateOrder() {
 
               <div className="input-block">
                 <label htmlFor="client">Cliente</label>
-                <DropDown options={clients} onDropDownChange={handleClientChange}/>
+                <ClientDropDown defaultId={null} onDropDownChange={handleClientChange}/>
                 <label htmlFor="items">Itens</label>
                 <button onClick={onAddRowClick} className="add-item">
                   <FiPlus size={20} className="add-item-logo"/>
                   Adicionar Item
                 </button>
-                <ItemTable products={products} data={items}/>
+                <ItemTable items={items}/>
               </div>
           </fieldset>
         </form>

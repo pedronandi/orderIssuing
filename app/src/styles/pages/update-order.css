@@ -1,0 +1,49 @@
+#page-update-order {
+  display: flex;
+}
+
+#page-update-order main {
+  flex: 1;
+}
+
+form.update-order-form {
+  width: 750px;
+  margin: 64px auto;
+  padding: 64px 80px;
+
+  background: #212743;
+  border: 2px solid #00BEE5;
+  
+  overflow: hidden;
+}
+
+form.update-order-form fieldset {
+  border: 0;
+}
+
+form.update-order-form fieldset + fieldset {
+  margin-top: 80px;
+}
+
+form.update-order-form fieldset legend {
+  width: 100%;
+  border-bottom: 2px solid #00BEE5;
+  padding-bottom: 24px;
+
+  font-size: 32px;
+  line-height: 34px;
+  color: #00BEE5;
+  font-weight: 700;
+}
+
+form.update-order-form .input-block + .input-block {
+  margin-top: 24px;
+}
+
+form.update-order-form .input-block label {
+  font-size: 24px;
+  display: flex;
+  color: #00BEE5;
+  margin: 20px 0 8px 0;
+  line-height: 24px;
+}
