@@ -5,8 +5,8 @@ import Sidebar from '../components/Sidebar';
 import DropDown from '../components/DropDown';
 import ItemTable from "../components/ItemTable";
 
-import { Data } from '../interfaces/Data';
 import { Client } from '../interfaces/Client';
+import { Data } from '../interfaces/Data';
 import { Product } from '../interfaces/Product';
 
 import api from '../services/api';
@@ -17,7 +17,7 @@ export default function CreateOrder() {
   const [clients, setClients] = useState<Client[]>([]);
   const [client, setClient] = useState<Client>();
   const [products, setProducts] = useState<Product[]>([]);
-  const [data, setRowData] = useState<Data[]>([]);
+  const [items, setItem] = useState<Data[]>([]);
 
   useEffect(() => {
     api.get('client').then(response => {
@@ -37,9 +37,7 @@ export default function CreateOrder() {
             name: element.name
           }
         ]
-      });
-
-      setProducts(productsRetrieved);*/
+      });*/
       setProducts(response.data);
     });
   }, []);
@@ -48,23 +46,19 @@ export default function CreateOrder() {
     setClient(clients[index]);
   }
 
-  /*function handleProductChange(index: number) {
-    setProduct(products[index]);
-  }*/
-
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
   }
 
   const onAddRowClick = () => {
-    const item: Data = {
-      products: products,
+    const emptyItem: Data = {
+      product: undefined,
       amount: undefined,
       unitPrice: undefined,
-      profitability: ""
+      profitability: undefined
     };
-    
-    setRowData(data.concat(item));
+
+    setItem(items.concat(emptyItem));
   }
 
   return (
@@ -79,12 +73,11 @@ export default function CreateOrder() {
                 <label htmlFor="client">Cliente</label>
                 <DropDown options={clients} onDropDownChange={handleClientChange}/>
                 <label htmlFor="items">Itens</label>
-                {/*<DropDown options={products} onDropDownChange={handleProductChange}/>*/}
                 <button onClick={onAddRowClick} className="add-item">
                   <FiPlus size={20} className="add-item-logo"/>
                   Adicionar Item
                 </button>
-                <ItemTable data={data}/>
+                <ItemTable products={products} data={items}/>
               </div>
           </fieldset>
         </form>

@@ -43,6 +43,7 @@
 }
 
 #page-landing .content-wrapper table {
+  width: 30%;
   margin-top: 40px;
 
   border-collapse: collapse;

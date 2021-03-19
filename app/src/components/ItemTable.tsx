@@ -1,9 +1,10 @@
-import React, { useMemo } from "react";
-import { useTable, Column, useSortBy } from "react-table";
+import React, { ChangeEvent, useMemo } from "react";
+import { useTable, Column, useSortBy, Row } from "react-table";
 
 import DropDown from '../components/DropDown';
 
 import { Data } from '../interfaces/Data';
+import { Product } from '../interfaces/Product';
 
 import '../styles/components/item-table.css';
 
@@ -14,39 +15,56 @@ import '../styles/components/item-table.css';
 */
 
 interface ItemTableProps {
+  products: Product[];
   data: Data[];
 }
 
 export default function ItemTable(props: ItemTableProps) {
-  const{data} = props;
+  const{products, data} = props;
 
-  console.log(data);
-
-  function handleProductChange(index: number) {
-    console.log(index);
-  }
-
-  const columns: Column<Data>[] = useMemo(() => [
-    {
-      Header: "Produto",
-      accessor: "products",
-      Cell: ({ cell: { value } }) => (
-        <DropDown options={value} onDropDownChange={handleProductChange}/>
-      )
-    },
-    {
-      Header: "Quantidade",
-      accessor: "amount"
-    },
-    {
-      Header: "Preço Unitário",
-      accessor: "unitPrice"
-    },
-    {
-      Header: "Rentabilidade",
-      accessor: "profitability"
+  const columns: Column<Data>[] = useMemo(() => {
+    function handleProductChange(row: Row<Data>, productIndex: number) {
+      const index: number = ((row.id as any) as number);
+      data[index].product = products[productIndex];
+      data[index].unitPrice = products[productIndex].unitPrice;
+      console.log(data);
     }
-  ], []);
+
+    /*function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+      console.log(event.target.value);
+    }*/
+
+    return [
+      {
+        Header: "Produto",
+        accessor: "product",
+        Cell: ({ cell: { row } }) => (
+          <DropDown options={products} onDropDownChange={handleProductChange.bind(null, row)}/>
+        )
+      },
+      {
+        Header: "Quantidade",
+        accessor: "amount",
+        /*Cell: ({ cell: { value } }) => (
+          <input value={value} onChange={handleInputChange} className="editable-input"/>
+        )*/
+      },
+      {
+        Header: "Preço Unitário",
+        accessor: "unitPrice",
+        /*Cell: ({ cell: { row } }) => (
+          <input value={data[((row.id as any) as number)].unitPrice} onChange={handleInputChange} className="editable-input"/>
+        )*/
+      },
+      {
+        Header: "Rentabilidade",
+        accessor: "profitability"
+      }
+    ]
+  }, [
+    products,
+    data
+  ]);
   
   const {
     getTableProps,

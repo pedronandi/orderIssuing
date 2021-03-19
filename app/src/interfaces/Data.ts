@@ -1,8 +1,8 @@
-import { Product } from '../interfaces/Product';
+import { Product } from './Product';
 
 export interface Data {
-  products: Product[];
+  product: Product | undefined;
   amount: number | undefined;
   unitPrice: number | undefined;
-  profitability: string;
+  profitability: string | undefined;
 }
