@@ -27,13 +27,32 @@
 }
 
 #page-landing .content-wrapper main {
-  max-width: 1100px;
+  max-width: 870px;
 }
 
-#page-landing .content-wrapper main h1 {
-  font-size: 76px;
+#page-landing .content-wrapper main .title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 56px;
   font-weight: 900;
   line-height: 70px;
+}
+
+#page-landing .content-wrapper main .title .img-logo {
+  width: 8%;
+  animation: rotation 30s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }
 
 #page-landing .content-wrapper main p {

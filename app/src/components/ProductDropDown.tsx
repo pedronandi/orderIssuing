@@ -6,21 +6,25 @@ import api from '../services/api';
 import '../styles/components/drop-down.css';
 
 interface ProductDropDownProps {
-  defaultId:number;
+  defaultId:number | null;
   onDropDownChange:any;
 }
 
 function getDefaultIndex(products: Product[], defaultId:number) {
-  const index:number = products.map((product) => {
-    return product.id;
-  }).indexOf(defaultId);
-  
-  return index;
+  if(defaultId == null) {
+    return 'default';
+  } else {
+    const index:number = products.map((product) => {
+      return product.id;
+    }).indexOf((defaultId as any) as number);
+    
+    return ((index as any) as string);
+  }
 }
 
 export default function ProductDropDown(props: ProductDropDownProps) {
   const [products, setProducts] = useState<Product[]>([]);
-  const [defaultIndex, setDefaultIndex] = useState<number>();
+  const [defaultIndex, setDefaultIndex] = useState<string>();
   
   useEffect(() => {
     api.get('product').then(response => {
@@ -29,13 +33,13 @@ export default function ProductDropDown(props: ProductDropDownProps) {
   }, []);
 
   useEffect(() => {
-    setDefaultIndex(getDefaultIndex(products, props.defaultId));
+    setDefaultIndex(getDefaultIndex(products, props.defaultId!));
   }, [products, props.defaultId]);
 
   function handleChange(event: ChangeEvent<HTMLSelectElement>) {
     const index:number = ((event.target.value as any) as number);
     const selectedProduct:Product = products[index];
-    setDefaultIndex(index);
+    setDefaultIndex(((index as any) as string));
     props.onDropDownChange(selectedProduct);
   }
 

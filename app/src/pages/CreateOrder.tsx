@@ -7,6 +7,7 @@ import ItemTable from "../components/ItemTable";
 
 import { Client } from '../interfaces/Client';
 import { Data } from '../interfaces/Data';
+import { Order } from '../interfaces/Order';
 
 import '../styles/pages/create-order.css';
 
@@ -20,6 +21,14 @@ export default function CreateOrder() {
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
+
+    var newOrder:Order ={
+      id: 1,
+      client: client as Client,
+      items: items as Data[]
+    }
+
+    console.log(newOrder);
   }
 
   const onAddRowClick = () => {
@@ -51,6 +60,10 @@ export default function CreateOrder() {
                   Adicionar Item
                 </button>
                 <ItemTable items={items}/>
+                <button onClick={handleSubmit} className="add-item">
+                  <FiPlus size={20} className="add-item-logo"/>
+                  Criar Pedido
+                </button>
               </div>
           </fieldset>
         </form>

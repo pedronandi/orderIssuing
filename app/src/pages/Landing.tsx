@@ -4,6 +4,7 @@ import { FiPlus } from 'react-icons/fi';
 
 import { Order } from '../interfaces/Order';
 import api from '../services/api';
+import reactLogo from '../assets/react.png';
 
 import '../styles/pages/landing.css';
 
@@ -24,8 +25,11 @@ function Landing() {
         <div id="page-landing">
             <div className="content-wrapper">
                 <main>
-                <h1>Emissão de Pedidos</h1>
-                <p>Abaixo, os pedidos já existentes:</p>
+                    <section className="title">
+                        <h1>Emissão de Pedidos</h1>
+                        <img src={reactLogo} alt="React" className="img-logo"/>
+                    </section>
+                    <p>Abaixo, os pedidos já existentes:</p>
                 </main>
 
                 <table>
