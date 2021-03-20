@@ -7,7 +7,7 @@ Esse projeto funciona como front-end de uma aplicação simplificada de emissão
 O trabalho realizado até o momento pode ser acompanhado em tempo real através do link: http://order-issuing-pedronandi.vercel.app
 O projeto está hospedado na plataforma da [Vercel](https://vercel.com/).
 
-##Preview:
+## Preview:
 
 <p align="center"><strong>[Landing]</strong></p>
 <p align="center">
